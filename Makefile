@@ -28,3 +28,7 @@ test: build
 
 sdist:
 	python setup.py sdist --formats=gztar,zip
+
+download:
+	curl -L -O https://github.com/Yvictor/ta-lib/releases/download/TA_Lib-0.4.17/ta-lib-0.4.0-src.tar.gz
+	tar -xzf ta-lib-0.4.0-src.tar.gz

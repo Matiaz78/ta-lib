@@ -5,6 +5,8 @@ import os
 import warnings
 
 from distutils.dist import Distribution
+with open('README.md', 'r', encoding='utf8') as f:
+    README = f.read()
 
 display_option_names = Distribution.display_option_names + ['help', 'help-commands']
 query_only = any('--' + opt in sys.argv for opt in display_option_names) or len(sys.argv) < 2 or sys.argv[1] == 'egg_info'
@@ -94,13 +96,15 @@ ext_modules = [
 ]
 
 setup(
-    name = 'TA-Lib',
+    name = 'talib-binary',
     version = '0.4.18',
     description = 'Python wrapper for TA-Lib',
+    long_description=README,
+    long_description_content_type='text/markdown',
     author = 'John Benediktsson',
     author_email = 'mrjbq7@gmail.com',
-    url = 'http://github.com/mrjbq7/ta-lib',
-    download_url = 'https://github.com/mrjbq7/ta-lib/releases',
+    url = 'https://github.com/Yvictor/ta-lib',
+    download_url = 'https://github.com/Yvictor/ta-lib/releases',
     classifiers = [
         "License :: OSI Approved :: BSD License",
         "Development Status :: 4 - Beta",

@@ -1,6 +1,6 @@
 # TA-Lib
 
-[![](https://api.travis-ci.org/mrjbq7/ta-lib.svg)](https://travis-ci.org/mrjbq7/ta-lib)
+[![Build Status](https://cloud.drone.io/api/badges/Yvictor/ta-lib/status.svg)](https://cloud.drone.io/Yvictor/ta-lib)
 
 This is a Python wrapper for [TA-LIB](http://ta-lib.org) based on Cython
 instead of SWIG. From the homepage:
@@ -19,6 +19,8 @@ aren't as efficient as they could be. Therefore this project uses Cython and
 Numpy to efficiently and cleanly bind to TA-Lib -- producing results 2-4
 times faster than the SWIG interface.
 
+Origin Repo is from [mrjbq7/ta-lib](https://github.com/mrjbq7/ta-lib). In this fork repo just provide with prebuild binary wheel to avoid lot of install issues.
+
 ## Installation
 
 You can install from PyPI:
@@ -27,142 +29,11 @@ You can install from PyPI:
 $ pip install TA-Lib
 ```
 
-Or checkout the sources and run ``setup.py`` yourself:
-
+Install from pre-build binary
 ```
-$ python setup.py install
-```
-
-### Troubleshooting
-
-If you get a warning that looks like this:
-
-```
-setup.py:79: UserWarning: Cannot find ta-lib library, installation may fail.
-warnings.warn('Cannot find ta-lib library, installation may fail.')
+pip install talib-binary
 ```
 
-This typically means ``setup.py`` can't find the underlying ``TA-Lib``
-library, a dependency which needs to be installed.
-
-If you installed the underlying ``TA-Lib`` library with a custom prefix
-(e.g., with ``./configure --prefix=$PREFIX``), then when you go to install
-this python wrapper you can specify additional search paths to find the
-library and include files for the underyling ``TA-Lib`` library using the
-``TA_LIBRARY_PATH`` and ``TA_INCLUDE_PATH`` environment variables:
-
-```sh
-$ export TA_LIBRARY_PATH=$PREFIX/lib
-$ export TA_INCLUDE_PATH=$PREFIX/include
-$ python setup.py install # or pip install ta-lib
-```
-
-Sometimes installation will produce build errors like this:
-
-```
-func.c:256:28: fatal error: ta-lib/ta_libc.h: No such file or directory
-compilation terminated.
-```
-
-or:
-
-```
-common.obj : error LNK2001: unresolved external symbol TA_SetUnstablePeriod
-common.obj : error LNK2001: unresolved external symbol TA_Shutdown
-common.obj : error LNK2001: unresolved external symbol TA_Initialize
-common.obj : error LNK2001: unresolved external symbol TA_GetUnstablePeriod
-common.obj : error LNK2001: unresolved external symbol TA_GetVersionString
-```
-
-This typically means that it can't find the underlying ``TA-Lib`` library, a
-dependency which needs to be installed.  On Windows, this could be caused by
-installing the 32-bit binary distribution of the underlying ``TA-Lib`` library,
-but trying to use it with 64-bit Python.
-
-Sometimes installation will fail with errors like this:
-
-```
-talib/common.c:8:22: fatal error: pyconfig.h: No such file or directory
- #include "pyconfig.h"
-                      ^
-compilation terminated.
-error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
-```
-
-This typically means that you need the Python headers, and should run
-something like:
-
-```
-$ sudo apt-get install python3-dev
-```
-
-Sometimes building the underlying ``TA-Lib`` library has errors running
-``make`` that look like this:
-
-```
-../libtool: line 1717: cd: .libs/libta_lib.lax/libta_abstract.a: No such file or directory
-make[2]: *** [libta_lib.la] Error 1
-make[1]: *** [all-recursive] Error 1
-make: *** [all-recursive] Error 1
-```
-
-This might mean that the directory path to the underlying ``TA-Lib`` library
-has spaces in the directory names.  Try putting it in a path that does not have
-any spaces and trying again.
-
-
-### Dependencies
-
-To use TA-Lib for python, you need to have the
-[TA-Lib](http://ta-lib.org/hdr_dw.html) already installed. You should
-probably follow their installation directions for your platform, but some
-suggestions are included below for reference.
-
-##### Mac OS X
-
-```
-$ brew install ta-lib
-```
-
-##### Windows
-
-Download [ta-lib-0.4.0-msvc.zip](http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-msvc.zip)
-and unzip to ``C:\ta-lib``.
-
-> This is a 32-bit binary release.  If you want to use 64-bit Python, you will
-> need to build a 64-bit version of the library. Some unofficial (**and
-> unsupported**) instructions for building on 64-bit Windows 10, here for
-> reference:
->
-> 1. Download and Unzip ``ta-lib-0.4.0-msvc.zip``
-> 2. Move the Unzipped Folder ``ta-lib`` to ``C:\``
-> 3. Download and Install Visual Studio Community 2015
->    * Remember to Select ``[Visual C++]`` Feature
-> 4. Build TA-Lib Library
->    * From Windows Start Menu, Start ``[VS2015 x64 Native Tools Command
->      Prompt]``
->    * Move to ``C:\ta-lib\c\make\cdr\win32\msvc``
->    * Build the Library ``nmake``
-
-You might also try these unofficial windows binaries for both 32-bit and
-64-bit:
-
-https://www.lfd.uci.edu/~gohlke/pythonlibs/#ta-lib
-
-##### Linux
-
-Download [ta-lib-0.4.0-src.tar.gz](http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz) and:
-
-```
-$ tar -xzf ta-lib-0.4.0-src.tar.gz
-$ cd ta-lib/
-$ ./configure --prefix=/usr
-$ make
-$ sudo make install
-```
-
-> If you build ``TA-Lib`` using ``make -jX`` it will fail but that's OK!
-> Simply rerun ``make -jX`` followed by ``[sudo] make install``.
 
 ## Function API
 
