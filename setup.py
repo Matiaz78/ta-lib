@@ -97,7 +97,7 @@ ext_modules = [
 
 setup(
     name = 'talib-binary',
-    version = '0.4.18',
+    version = '0.4.19',
     description = 'Python wrapper for TA-Lib',
     long_description=README,
     long_description_content_type='text/markdown',

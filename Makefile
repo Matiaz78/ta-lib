@@ -53,3 +53,6 @@ install-test:
 	do	\
 		$$PYBIN/pip install talib-binary --no-index -f wheelhouse;	\
 	done
+
+upload-pypi-server:
+	/opt/python/cp37-cp37m/bin/twine upload wheelhouse/talib_binary*manylinux*.whl
